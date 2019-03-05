@@ -31,6 +31,15 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// scriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManager1;
+        
+        /// <summary>
         /// txt_user_search control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.WebControls.Label lbl_user_search;
         
         /// <summary>
+        /// btn_new_title control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_new_title;
+        
+        /// <summary>
         /// btn_default_profile control.
         /// </summary>
         /// <remarks>
@@ -74,24 +92,6 @@ namespace MuhendisSozluk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_default_loginout;
-        
-        /// <summary>
-        /// txt_default_title_search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_default_title_search;
-        
-        /// <summary>
-        /// btn_default_title_search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_default_title_search;
         
         /// <summary>
         /// title_repeater control.
@@ -121,13 +121,40 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.WebControls.Repeater entry_repeater;
         
         /// <summary>
-        /// txt_write_entry control.
+        /// addbkz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_write_entry;
+        protected global::System.Web.UI.UpdatePanel addbkz;
+        
+        /// <summary>
+        /// txt_bkz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_bkz;
+        
+        /// <summary>
+        /// btn_bkz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_bkz;
+        
+        /// <summary>
+        /// div_write_entry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_write_entry;
         
         /// <summary>
         /// btn_entry_send control.

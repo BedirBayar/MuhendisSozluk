@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #ffffe6;
+    background-color: #e6e6e6;
     height: auto;
     width: 100%;
     margin: auto;
@@ -28,8 +28,6 @@
         float: left;
         border-right: 1px solid #660000;
         text-align:center;
-       align-items:center;
-       line-height:100px;
     }
    
 
@@ -61,7 +59,7 @@
 
 .solkanat {
     width: 25%;
-    height: 600px;
+    height: 1000px;
     float: left;
     border-right: 1px solid #660000;
 }
@@ -82,11 +80,16 @@
         }
 
 .entries {
-    width: 49%;
+    width: 50%;
     height: 900px;
     float: left;
     border-right: 1px solid #660000;
-    background-color: #ffffe6;
+    background-color: #aa9191;
+}
+.entries .footer {
+    width: 100%;
+    height: 100px;
+    text-align:center;
 }
 .entries .txt_write_entry{
     height:auto;
@@ -100,12 +103,7 @@
 }
 
 .sagkanat {
-    width: 25%;
+    width: 23%;
     height: 600px;
     float: left;
-}
-.footer {
-    width: 100%;
-    height: 50px;
-    border: 1px solid black;
 }

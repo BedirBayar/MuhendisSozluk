@@ -27,6 +27,13 @@ namespace MuhendisSozluk
                     btn_default_profile.Text = "makamım";
                     btn_default_loginout.Text = "çıkış yap";
 
+
+                    //if (Request.QueryString["bkz"] != null)
+                    //{
+                    //    String bkz = Request.QueryString["bkz"].ToString();
+                    //    Response.Redirect("default.aspx?url=" + validateBkz(bkz));
+                    //}
+
                 }
                 else
                 {
@@ -226,8 +233,9 @@ namespace MuhendisSozluk
             object user = Session["username"];
             if (user != null)
             {
+               // String a = div_write_entry.InnerText;
                 DateTime date = DateTime.Now;
-                String content = txt_write_entry.Text;
+                String content = div_write_entry.InnerHtml;
                 int writerid = getWriterID(user.ToString());
                 int titleid = getTitleID(lbl_default_title_name.Text);
 
@@ -247,9 +255,10 @@ namespace MuhendisSozluk
                     {
                         var reader = cmd.ExecuteNonQuery();
                         TitleLayer.setTitleUpdate(titleid);
-                        txt_write_entry.Text = "";
-                        loadEntries(lbl_default_title_name.Text);
-                        Page_Load(sender, e);
+                        div_write_entry.InnerText = "";
+                       //loadEntries(lbl_default_title_name.Text);
+                       
+                       
                     }
                     catch (Exception ex)
                     {
@@ -266,6 +275,27 @@ namespace MuhendisSozluk
             {
                 Response.Redirect("/User/Login.aspx");
             }
+        }
+
+        protected String validateBkz(String bkz)
+        {
+           
+            String url = "";
+            SqlConnection con1 = new SqlConnection(con);
+            SqlCommand cmd = con1.CreateCommand();
+            cmd.CommandText = "select Url from TITLE where Name=@name";
+            cmd.Parameters.AddWithValue(@"name", bkz);
+            con1.Open();
+            var rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+                url = rdr.GetString(0);
+            else
+                bkz = "böyle bir başlık yok.";
+            con1.Close();
+
+           return "(bkz: "+"<a href=" +url+ " style="+"text-decoration:none"+"> " + bkz + "</a>)";
+
+
         }
         protected int getWriterID(String writerName)
         {
@@ -408,7 +438,14 @@ namespace MuhendisSozluk
 
             else
             {
+                if (Session["username"] != null && getSeniority(Session["username"].ToString()) != 1) { 
+                btn_new_title.Visible = true;
                 lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                }
+                else
+                {
+                    lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                }
             }
             con2.Close();
         }
@@ -476,6 +513,70 @@ namespace MuhendisSozluk
             }
             con3.Close();
             return result;
+        }
+
+        protected void btn_new_title_Click(object sender, EventArgs e)
+        {
+            String name = txt_user_search.Text;
+            String url = Helper.SEOUrl(txt_user_search.Text);
+            DateTime date = DateTime.Now;
+            int writer_id = getWriterID(Session["username"].ToString());
+            int dep_id = getDepartmentID(Session["username"].ToString());
+            SqlConnection con1 = new SqlConnection(con);
+            SqlCommand cmd1 = con1.CreateCommand();
+            cmd1.CommandText = "insert into TITLE (Name, Date, LastUpdate, Visible, IsActive, Useful, Useless, Url, WriterID, DepartmentID) values (@name, @date, @lastupdate, 1, 1, 0, 0, @url, @wid, @did)";
+            cmd1.Parameters.AddWithValue(@"name", name);
+            cmd1.Parameters.AddWithValue(@"date", date);
+            cmd1.Parameters.AddWithValue(@"lastupdate", date);
+            cmd1.Parameters.AddWithValue(@"url", url);
+            cmd1.Parameters.AddWithValue(@"wid", writer_id);
+            cmd1.Parameters.AddWithValue(@"did", dep_id);
+            con1.Open();
+            var exe = cmd1.ExecuteNonQuery();
+            if (exe > 0)
+            {
+                Response.Redirect("~/" + url);
+            }
+            else lbl_user_search.Text = "başlık tam açılamadı. sıkışmış olmalı";
+
+        }
+        protected int getDepartmentID(String username)
+        {
+            int result = 0;
+            SqlConnection c1 = new SqlConnection(con);
+            SqlCommand cmd1 = c1.CreateCommand();
+            cmd1.CommandText = "select DepartmentID from WRITER where Name=@name";
+            cmd1.Parameters.AddWithValue(@"name", username);
+            c1.Open();
+            var rdr = cmd1.ExecuteReader();
+            if (rdr.Read())
+            {
+                result = rdr.GetInt32(0);
+            }
+            else result = -1;
+            c1.Close();
+            return result;
+        }
+
+        protected void btn_bkz_Click(object sender, EventArgs e)
+        {
+            String bkz = txt_bkz.Text;
+            String url = "";
+            SqlConnection con1 = new SqlConnection(con);
+            SqlCommand cmd = con1.CreateCommand();
+            cmd.CommandText = "select Url from TITLE where Name=@name";
+            cmd.Parameters.AddWithValue(@"name", bkz);
+            con1.Open();
+            var rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+                url = rdr.GetString(0);
+            else
+                bkz = "böyle bir başlık yok.";
+                
+            con1.Close();
+
+           div_write_entry.InnerHtml+= "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
+
         }
     }//master.cs
 

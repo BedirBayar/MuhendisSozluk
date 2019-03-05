@@ -58,6 +58,15 @@ namespace MuhendisSozluk.User {
         protected global::System.Web.UI.WebControls.Label lbl_user_search;
         
         /// <summary>
+        /// btn_new_title control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_new_title;
+        
+        /// <summary>
         /// btn_default_profile control.
         /// </summary>
         /// <remarks>

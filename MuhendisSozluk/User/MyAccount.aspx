@@ -76,8 +76,8 @@
                 <asp:TextBox ID="txt_myaccount_confirmpassword" runat="server" Width="250px"  BackColor="#ffffe6" TextMode="Password"></asp:TextBox>
             </div>
             <div class="fixedinfo">
-                <asp:Label ID="lbl_myaccount_gender_lady" runat="server" Text="kadın  :  " Width="250px" Font-Size="Large" Height="75px"></asp:Label> <asp:CheckBox ID="check_myaccount_lady" runat="server" Width="50px" Height="50px"/>
-                <asp:Label ID="lbl_myaccount_gender_gentleman" runat="server" Text="erkek  :  " Width="250px" Font-Size="Large"></asp:Label> <asp:CheckBox ID="check_myaccount_gentleman" runat="server" Width="50px" Height="50px"/>
+                <asp:Label ID="lbl_myaccount_gender_lady" runat="server" Text="kadın  :  " Width="250px" Font-Size="Large" Height="75px"></asp:Label> <asp:CheckBox ID="check_myaccount_lady" OnClick="clickLady" runat="server" Width="50px" Height="50px"/>
+                <asp:Label ID="lbl_myaccount_gender_gentleman" runat="server" Text="erkek  :  " Width="250px" Font-Size="Large"></asp:Label> <asp:CheckBox ID="check_myaccount_gentleman" OnClick="clickGentleman" runat="server" Width="50px" Height="50px"/>
             </div>
             <div class="fixedinfo">
                 <asp:Button Class="btn_myaccount_enter" ID="btn_myaccount_enter" runat="server" Width="100px" Height="90%" Font-Size="Large" Text="güncelle" BorderStyle="None" OnClick="btn_myaccount_enter_Click" />
@@ -87,5 +87,17 @@
             </div>
         </div>
     </form>
+    <script type="text/javascript">
+        function clickLady() {
+            if (document.getElementById("check_myaccount_gentleman").getAttribute("Checked")) {
+                document.getElementById("check_myaccount_gentleman").getAttribute("Checked") = false;
+            }
+        }
+         function clickGentleman() {
+            if (document.getElementById("check_myaccount_lady").getAttribute("Checked")) {
+                document.getElementById("check_myaccount_lady").getAttribute("Checked") = false;
+            }
+        }
+    </script>
 </body>
 </html>

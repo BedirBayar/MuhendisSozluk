@@ -163,7 +163,15 @@ namespace MuhendisSozluk.Entry
 
             else
             {
-                lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                if (Session["username"] != null && getSeniority(Session["username"].ToString()) != 1)
+                {
+                    btn_new_title.Visible = true;
+                    lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                }
+                else
+                {
+                    lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                }
             }
             con2.Close();
         }

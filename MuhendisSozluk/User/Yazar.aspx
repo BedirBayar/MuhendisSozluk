@@ -14,11 +14,15 @@
             <div class="logo">
                  </div>
             
-            <div class="search">
-                
-                <asp:TextBox ID="txt_user_search" runat="server" placeholder="başlık, #entry ya da @yazar" Width="250px" Height="20px" BorderStyle="Solid" ></asp:TextBox>
-                <asp:Button ID="btn_user_search" runat="server" Width="70px" Height="25px" Text="ara" Font-Size="Large" OnClick="btn_user_search_Click" /></div>
-                <asp:Label ID="lbl_user_search" runat="server"></asp:Label>
+              <div class="search">
+               <div style="width:100%; height:30%; text-align:center">
+                   <asp:TextBox ID="txt_user_search" runat="server" placeholder="başlık, #entry ya da @yazar" Width="250px" Height="20px" BorderStyle="Solid" ></asp:TextBox>
+                <asp:Button ID="btn_user_search" runat="server" Width="70px" Height="25px" Text="ara" Font-Size="Large" BorderStyle="None"  OnClick="btn_user_search_Click"/>
+
+               </div>
+               <div style="width:100%; height:20%;"> <asp:Label ID="lbl_user_search" runat="server"> </asp:Label> </div>
+                <div style="width:100%; height:49%; line-height:45px;"><asp:Button ID="btn_new_title" runat="server" Visible="false" Text="başlığı aç"  /></div>
+            </div>
             
             <div class="profile">
                 <div class="buttons">
