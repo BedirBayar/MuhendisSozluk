@@ -31,13 +31,13 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// scriptManager1 control.
+        /// script1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager scriptManager1;
+        protected global::System.Web.UI.ScriptManager script1;
         
         /// <summary>
         /// txt_user_search control.
@@ -121,13 +121,13 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.WebControls.Repeater entry_repeater;
         
         /// <summary>
-        /// addbkz control.
+        /// panelbkz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel addbkz;
+        protected global::System.Web.UI.UpdatePanel panelbkz;
         
         /// <summary>
         /// txt_bkz control.
@@ -154,7 +154,7 @@ namespace MuhendisSozluk {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_write_entry;
+        protected global::System.Web.UI.WebControls.TextBox div_write_entry;
         
         /// <summary>
         /// btn_entry_send control.

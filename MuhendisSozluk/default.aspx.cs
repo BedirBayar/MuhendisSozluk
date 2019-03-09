@@ -235,7 +235,7 @@ namespace MuhendisSozluk
             {
                // String a = div_write_entry.InnerText;
                 DateTime date = DateTime.Now;
-                String content = div_write_entry.InnerHtml;
+                String content = div_write_entry.Text;
                 int writerid = getWriterID(user.ToString());
                 int titleid = getTitleID(lbl_default_title_name.Text);
 
@@ -255,7 +255,7 @@ namespace MuhendisSozluk
                     {
                         var reader = cmd.ExecuteNonQuery();
                         TitleLayer.setTitleUpdate(titleid);
-                        div_write_entry.InnerText = "";
+                        div_write_entry.Text = "";
                        //loadEntries(lbl_default_title_name.Text);
                        
                        
@@ -562,20 +562,21 @@ namespace MuhendisSozluk
         {
             String bkz = txt_bkz.Text;
             String url = "";
-            SqlConnection con1 = new SqlConnection(con);
-            SqlCommand cmd = con1.CreateCommand();
-            cmd.CommandText = "select Url from TITLE where Name=@name";
-            cmd.Parameters.AddWithValue(@"name", bkz);
-            con1.Open();
-            var rdr = cmd.ExecuteReader();
-            if (rdr.Read())
-                url = rdr.GetString(0);
-            else
-                bkz = "böyle bir başlık yok.";
+            url += Helper.SEOUrl(bkz);
+            //SqlConnection con1 = new SqlConnection(con);
+            //SqlCommand cmd = con1.CreateCommand();
+            //cmd.CommandText = "select Url from TITLE where Name=@name";
+            //cmd.Parameters.AddWithValue(@"name", bkz);
+            //con1.Open();
+            //var rdr = cmd.ExecuteReader();
+            //if (rdr.Read())
+            //    url = rdr.GetString(0);
+            //else
+            //    bkz = "böyle bir başlık yok.";
                 
-            con1.Close();
-
-           div_write_entry.InnerHtml+= "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
+            //con1.Close();
+            
+           div_write_entry.Text+= "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
 
         }
     }//master.cs
