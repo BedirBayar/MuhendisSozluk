@@ -50,37 +50,37 @@ namespace MuhendisSozluk
                 }
                 else
                 {
-                    loadEntries("sozluk");
-                    lbl_default_title_name.Text = "sözlük";
-                   
+                    loadEntries("muhendis-sozluk");
+                    lbl_default_title_name.Text = "mühendis sözlük";
+
                 }
             }
-            
-                //loadSolKanat();
+
+            //loadSolKanat();
 
 
-                //var connect = new SqlConnection(con);
-                //var cmd = connect.CreateCommand();
-                //cmd.CommandText = "select Contents from ENTRY where TitleID = (select top 1 ID from TITLE order by LastUpdate asc)";
-                //connect.Open();
-                //var reader = cmd.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    bulletedlist_entries.Items.Add(reader.GetString(0));
-                //}
-                //connect.Close();
+            //var connect = new SqlConnection(con);
+            //var cmd = connect.CreateCommand();
+            //cmd.CommandText = "select Contents from ENTRY where TitleID = (select top 1 ID from TITLE order by LastUpdate asc)";
+            //connect.Open();
+            //var reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    bulletedlist_entries.Items.Add(reader.GetString(0));
+            //}
+            //connect.Close();
 
-                //var connect2 = new SqlConnection(con);
-                //var cmd2 = connect2.CreateCommand();
-                //cmd2.CommandText = "select top 1 Name from TITLE order by LastUpdate asc";
-                //connect2.Open();
-                //var reader2 = cmd2.ExecuteReader();
-                //while (reader2.Read())
-                //{
-                //    lbl_default_title_name.Text=reader2.GetString(0);
-                //}
-                //connect2.Close();
-            
+            //var connect2 = new SqlConnection(con);
+            //var cmd2 = connect2.CreateCommand();
+            //cmd2.CommandText = "select top 1 Name from TITLE order by LastUpdate asc";
+            //connect2.Open();
+            //var reader2 = cmd2.ExecuteReader();
+            //while (reader2.Read())
+            //{
+            //    lbl_default_title_name.Text=reader2.GetString(0);
+            //}
+            //connect2.Close();
+
         } //default.aspx.cs
         public String getTitleName(String url)
         {

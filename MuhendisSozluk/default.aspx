@@ -15,31 +15,6 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="script1" runat="server"></asp:ScriptManager>
 
-       
-         <%--   <script type="text/javascript">
-
-                
-
-
-       function addbkz() {
-
-       var bkz = document.getElementById("txt_bkz").value;
-           var isvalidbkz = new XMLHttpRequest();
-           isvalidbkz.onreadystatechange = function () {
-               if (/*this.readyState == 4 &&*/ this.status == 200) {
-                   document.getElementById("div_write_entry").textContent += this.responseText;
-               }
-           };
-       isvalidbkz.open("GET", "default.aspx? bkz=" + bkz, false);
-       isvalidbkz.send(null);
-
-
-
-       // }
-    </script>--%>
-       
-
-
         <div class="top">
             <div class="logo">
             </div>
@@ -84,10 +59,7 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <%--<asp:ListBox ID = "listSolKanat" runat="server" AutoPostBack="True" OnSelectedIndexChanged="listSolKanat_SelectedIndexChanged" Height="599px" Width="100%" BackColor="#ffd9b3" ForeColor="#333333" Font-Size="Large" Font-Names="Consolas" SelectionMode="Single">
-</asp:ListBox>--%>
-
-            <%-- <asp:ListBox ID="ListSolKanat" CssClass="ListSolKanat" runat="server" Height="599px" Width="100%" BackColor="#ffd9b3" ForeColor="#333333" Font-Size="Large" Font-Names="Consolas" SelectionMode="Single"  OnSelectedIndexChanged="ListSolKanat_OnSelectedItemChanged"  ></asp:ListBox>--%>
+         
         </div>
         <div class=" entries">
             <div class="title_name" style="width: 100%; height: 30px; float: left; text-align: center; line-height: 30px;">
@@ -122,7 +94,7 @@
                     <asp:Label ID="lbl_title_send" runat="server"></asp:Label>
                 </div>--%> 
             <div class="bkz" style="margin-top: 15px">
-            <asp:UpdatePanel ID="panelbkz" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true" >
+            <asp:UpdatePanel ID="panelbkz" runat="server">
                 <ContentTemplate>
                         <asp:TextBox ID="txt_bkz" placeholder="(bkz: )" runat="server" Width="70%" BorderStyle="None" Height="20px"></asp:TextBox>
 
@@ -132,9 +104,9 @@
                   
 
                 </ContentTemplate>
-                <Triggers>
+               <%-- <Triggers>
                     <asp:asyncPostBackTrigger ControlID="btn_bkz" EventName="Click"/>
-                </Triggers>
+                </Triggers>--%>
             </asp:UpdatePanel>
           </div>
                    <%-- <div contenteditable="true"   runat="server"  style="width: 98%; margin-top: 10px; height: 50px; padding: 5px; margin-left: auto; margin-right: auto; background-color: white">
