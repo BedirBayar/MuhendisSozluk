@@ -1,6 +1,4 @@
-﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="MuhendisSozluk._default" %>
-
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" ValidateRequest="false" Inherits="MuhendisSozluk._default" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +11,7 @@
 <body>
 
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="script1" runat="server"></asp:ScriptManager>
+
 
         <div class="top">
             <div class="logo">
@@ -59,7 +57,7 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-         
+
         </div>
         <div class=" entries">
             <div class="title_name" style="width: 100%; height: 30px; float: left; text-align: center; line-height: 30px;">
@@ -92,27 +90,29 @@
                 <div class="entry_send_button">
                     <asp:Button ID="btn_title_send" runat="server" BorderStyle="None" Text="başlık aç" Width="100px" Height="100%" BackColor="#ffffe6" OnClick="btn_title_send_Click"/>
                     <asp:Label ID="lbl_title_send" runat="server"></asp:Label>
-                </div>--%> 
+                </div>--%>
             <div class="bkz" style="margin-top: 15px">
-            <asp:UpdatePanel ID="panelbkz" runat="server">
-                <ContentTemplate>
+                <asp:ScriptManager ID="script1" runat="server"></asp:ScriptManager>
+                <asp:UpdatePanel ID="panelbkz" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                    <ContentTemplate>
                         <asp:TextBox ID="txt_bkz" placeholder="(bkz: )" runat="server" Width="70%" BorderStyle="None" Height="20px"></asp:TextBox>
 
                         <asp:Button ID="btn_bkz" runat="server" Width="50px" Height="20px" Text="ekle" OnClick="btn_bkz_Click" />
 
                         <asp:TextBox ID="div_write_entry" runat="server" Width="95%" TextMode="MultiLine"></asp:TextBox>
-                  
 
-                </ContentTemplate>
-               <%-- <Triggers>
-                    <asp:asyncPostBackTrigger ControlID="btn_bkz" EventName="Click"/>
-                </Triggers>--%>
-            </asp:UpdatePanel>
-          </div>
-                   <%-- <div contenteditable="true"   runat="server"  style="width: 98%; margin-top: 10px; height: 50px; padding: 5px; margin-left: auto; margin-right: auto; background-color: white">
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btn_bkz" EventName="Click" />
+                    </Triggers>
+
+                </asp:UpdatePanel>
+            </div>
+            <%-- <div contenteditable="true"   runat="server"  style="width: 98%; margin-top: 10px; height: 50px; padding: 5px; margin-left: auto; margin-right: auto; background-color: white">
                     </div>--%>
-                   
-        
+
+
 
 
             <%--                <asp:TextBox Class="txt_write_entry" ID="txt_write_entry" runat="server" MaxLength="100" TextMode="MultiLine"  placeholder="entry girebilmek için giriş yapınız." Width="99%" ></asp:TextBox>
@@ -134,7 +134,7 @@
 
 
     </form>
-   
+
 </body>
 </html>
 

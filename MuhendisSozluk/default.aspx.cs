@@ -15,12 +15,9 @@ namespace MuhendisSozluk
     {
         String con = connectionStrings.bedir;
         String title2 = "";
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
-            {
-
                 object user = Session["username"];
                 if (user != null)
                 {
@@ -54,7 +51,7 @@ namespace MuhendisSozluk
                     lbl_default_title_name.Text = "mühendis sözlük";
 
                 }
-            }
+            
 
             //loadSolKanat();
 
@@ -229,11 +226,11 @@ namespace MuhendisSozluk
 
         protected void btn_entry_send_Click(object sender, EventArgs e)
         {
-           
+
             object user = Session["username"];
             if (user != null)
             {
-               // String a = div_write_entry.InnerText;
+                // String a = div_write_entry.InnerText;
                 DateTime date = DateTime.Now;
                 String content = div_write_entry.Text;
                 int writerid = getWriterID(user.ToString());
@@ -256,9 +253,9 @@ namespace MuhendisSozluk
                         var reader = cmd.ExecuteNonQuery();
                         TitleLayer.setTitleUpdate(titleid);
                         div_write_entry.Text = "";
-                       //loadEntries(lbl_default_title_name.Text);
-                       
-                       
+                        //loadEntries(lbl_default_title_name.Text);
+
+
                     }
                     catch (Exception ex)
                     {
@@ -279,7 +276,7 @@ namespace MuhendisSozluk
 
         protected String validateBkz(String bkz)
         {
-           
+
             String url = "";
             SqlConnection con1 = new SqlConnection(con);
             SqlCommand cmd = con1.CreateCommand();
@@ -293,7 +290,7 @@ namespace MuhendisSozluk
                 bkz = "böyle bir başlık yok.";
             con1.Close();
 
-           return "(bkz: "+"<a href=" +url+ " style="+"text-decoration:none"+"> " + bkz + "</a>)";
+            return "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
 
 
         }
@@ -356,7 +353,7 @@ namespace MuhendisSozluk
             lbl_default_title_name.Text = title;
         }
 
-        
+
         protected void btn_user_search_Click(object sender, EventArgs e)
         {
             String key = txt_user_search.Text;
@@ -368,7 +365,7 @@ namespace MuhendisSozluk
             }
             else if (key.StartsWith("@"))
             {
-              searchWriter(key.Substring(1));
+                searchWriter(key.Substring(1));
             }
             else
             {
@@ -400,7 +397,7 @@ namespace MuhendisSozluk
         protected void searchWriter(String key)
         {
             String url = "~/yazar/" + Helper.SEOUrl(key);
-            
+
             SqlConnection con = new SqlConnection(connectionStrings.bedir);
             var cmd = con.CreateCommand();
             cmd.CommandText = "select ID from WRITER where Url = @number";
@@ -438,9 +435,10 @@ namespace MuhendisSozluk
 
             else
             {
-                if (Session["username"] != null && getSeniority(Session["username"].ToString()) != 1) { 
-                btn_new_title.Visible = true;
-                lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
+                if (Session["username"] != null && getSeniority(Session["username"].ToString()) != 1)
+                {
+                    btn_new_title.Visible = true;
+                    lbl_user_search.Text = "bu başlık imha edildi ya da hiç açılmadı.";
                 }
                 else
                 {
@@ -573,12 +571,13 @@ namespace MuhendisSozluk
             //    url = rdr.GetString(0);
             //else
             //    bkz = "böyle bir başlık yok.";
-                
+
             //con1.Close();
-            
-           div_write_entry.Text+= "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
+
+            div_write_entry.Text += "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
 
         }
+     
     }//master.cs
 
 }
