@@ -212,8 +212,7 @@ namespace MuhendisSozluk.User
         {
             LinkButton btn = (LinkButton)sender;
             String title = btn.Text;
-            //loadEntries(title);
-            //lbl_default_title_name.Text = title;
+            Response.Redirect("~/" + Helper.SEOUrl(title));
         }
     
 }

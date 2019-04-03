@@ -37,7 +37,7 @@ namespace MuhendisSozluk.User
                     fill();
                     fillWriter();
                 }
-                else Response.Redirect("~/default.aspx");
+                else Response.Redirect("~/yazar/antiochus");
 
 
             }

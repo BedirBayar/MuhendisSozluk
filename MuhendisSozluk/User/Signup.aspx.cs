@@ -86,17 +86,20 @@ namespace MuhendisSozluk.User
             gender = check_signup_gender_lady.Checked;
             department = ddl_signup_department.SelectedItem.Text;
             int departmentid = getDepartmentId(department);
+            String url = Helper.SEOUrl(username);
 
             var connection_signup = new SqlConnection(connectionStrings.bedir);
             var command_signup = connection_signup.CreateCommand();
             connection_signup.Open();
-            command_signup.CommandText = "insert into WRITER (Name, Email, Password, Gender, DepartmentID) values (@name, @email, @password, @gender, @department)";
+            command_signup.CommandText = "insert into WRITER (Name, Email, Password, Gender, DepartmentID, Url, SeiorityID) values (@name, @email, @password, @gender, @department, @url, 2)";
             command_signup.Parameters.AddWithValue("@name", username);
             command_signup.Parameters.AddWithValue("@email", email);
             command_signup.Parameters.AddWithValue("@password", password);
             command_signup.Parameters.AddWithValue("@gender", gender);
             command_signup.Parameters.AddWithValue("@department", departmentid);
-            try{
+            command_signup.Parameters.AddWithValue("@url", url);
+            try
+            {
                 var writer = command_signup.ExecuteNonQuery(); }
               catch(Exception ex)
             {

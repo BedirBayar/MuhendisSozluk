@@ -103,6 +103,24 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.WebControls.Label lbl_default_title_name;
         
         /// <summary>
+        /// script_entries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager script_entries;
+        
+        /// <summary>
+        /// update_entries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel update_entries;
+        
+        /// <summary>
         /// entry_repeater control.
         /// </summary>
         /// <remarks>
@@ -110,15 +128,6 @@ namespace MuhendisSozluk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater entry_repeater;
-        
-        /// <summary>
-        /// script1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager script1;
         
         /// <summary>
         /// panelbkz control.

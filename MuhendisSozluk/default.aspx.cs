@@ -13,23 +13,18 @@ namespace MuhendisSozluk
 {
     public partial class _default : System.Web.UI.Page
     {
-        String con = connectionStrings.bedir;
-        String title2 = "";
+        static String con = connectionStrings.bedir;
+        static String title2 = "muhendis-sozluk";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
                 object user = Session["username"];
                 if (user != null)
                 {
                     btn_default_profile.Text = "makamım";
                     btn_default_loginout.Text = "çıkış yap";
-
-
-                    //if (Request.QueryString["bkz"] != null)
-                    //{
-                    //    String bkz = Request.QueryString["bkz"].ToString();
-                    //    Response.Redirect("default.aspx?url=" + validateBkz(bkz));
-                    //}
 
                 }
                 else
@@ -38,47 +33,22 @@ namespace MuhendisSozluk
                     btn_default_loginout.Text = "giriş yap";
                 }
                 fill();
-                if (RouteData.Values["TITLE"] != null)
+
+                if (RouteData.Values["title"] != null)
                 {
-                    title2 = (RouteData.Values["TITLE"].ToString());
+                    title2 = RouteData.Values["title"].ToString();
                     loadEntries(title2);
                     lbl_default_title_name.Text = getTitleName(title2);
 
                 }
                 else
                 {
-                    loadEntries("muhendis-sozluk");
-                    lbl_default_title_name.Text = "mühendis sözlük";
+                   // Response.Redirect("/muhendis-sozluk");
 
                 }
-            
-
-            //loadSolKanat();
-
-
-            //var connect = new SqlConnection(con);
-            //var cmd = connect.CreateCommand();
-            //cmd.CommandText = "select Contents from ENTRY where TitleID = (select top 1 ID from TITLE order by LastUpdate asc)";
-            //connect.Open();
-            //var reader = cmd.ExecuteReader();
-            //while (reader.Read())
-            //{
-            //    bulletedlist_entries.Items.Add(reader.GetString(0));
-            //}
-            //connect.Close();
-
-            //var connect2 = new SqlConnection(con);
-            //var cmd2 = connect2.CreateCommand();
-            //cmd2.CommandText = "select top 1 Name from TITLE order by LastUpdate asc";
-            //connect2.Open();
-            //var reader2 = cmd2.ExecuteReader();
-            //while (reader2.Read())
-            //{
-            //    lbl_default_title_name.Text=reader2.GetString(0);
-            //}
-            //connect2.Close();
-
-        } //default.aspx.cs
+            }
+        }
+        
         public String getTitleName(String url)
         {
             String result = null;
@@ -212,18 +182,6 @@ namespace MuhendisSozluk
             return ds;
         }
 
-        //burası lissolkanat
-        //protected void listSolKanat_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //        loadEntries(listSolKanat.SelectedItem.ToString());
-        //    lbl_default_title_name.Text = listSolKanat.SelectedItem.ToString();
-
-
-        //}
-
-
-
         protected void btn_entry_send_Click(object sender, EventArgs e)
         {
 
@@ -232,7 +190,7 @@ namespace MuhendisSozluk
             {
                 // String a = div_write_entry.InnerText;
                 DateTime date = DateTime.Now;
-                String content = div_write_entry.Text;
+                String content = div_write_entry.Text.ToString();
                 int writerid = getWriterID(user.ToString());
                 int titleid = getTitleID(lbl_default_title_name.Text);
 
@@ -247,19 +205,21 @@ namespace MuhendisSozluk
                     cmd.Parameters.AddWithValue("@writername", user.ToString());
                     cmd.Parameters.AddWithValue("@titleid", titleid);
                     cmd.Parameters.AddWithValue("@titlename", lbl_default_title_name.Text);
+                   
+
                     connect.Open();
                     try
                     {
                         var reader = cmd.ExecuteNonQuery();
                         TitleLayer.setTitleUpdate(titleid);
                         div_write_entry.Text = "";
-                        //loadEntries(lbl_default_title_name.Text);
+                        loadEntries(lbl_default_title_name.Text);
 
 
                     }
                     catch (Exception ex)
                     {
-
+                        lbl_entrysend_status.Text = ex.Message.ToString();
                     }
                     connect.Close();
                 }

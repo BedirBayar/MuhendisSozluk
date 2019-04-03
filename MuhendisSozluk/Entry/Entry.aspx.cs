@@ -38,7 +38,7 @@ namespace MuhendisSozluk.Entry
                     fill();
                    
                 }
-                else Response.Redirect("~/default.aspx");
+                else Response.Redirect("~/entry/2");
 
 
             }

@@ -13,9 +13,12 @@ namespace MuhendisSozluk
 
         protected void Application_Start(object sender, EventArgs e)
         {
+
+          //  RouteTable.Routes.Add("default", new Route("{title}", new PageRouteHandler("~/")));
             RouteTable.Routes.Add("baslik", new Route("{title}", new PageRouteHandler("~/default.aspx")));
             RouteTable.Routes.Add("yazar", new Route("yazar/{name}", new PageRouteHandler("~/user/yazar.aspx")));
             RouteTable.Routes.Add("entry", new Route("entry/{number}", new PageRouteHandler("~/entry/entry.aspx")));
+            RouteTable.Routes.Add("oda", new Route("oda/{dep}", new PageRouteHandler("~/department/oda.aspx")));
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -26,6 +29,11 @@ namespace MuhendisSozluk
         {
             //routes.MapPageRoute("ForTitle", "~/{Name}", "~/default.aspx");
             //routes.MapPageRoute("ForTitle", "~/{Name}", "~/");
+  
+            routes.MapPageRoute("baslik", "/{title}", "~/default.aspx", false);
+            routes.MapPageRoute("yazar", "yazar/{name}", "~/user/yazar.aspx", false);
+            routes.MapPageRoute("entry", "entry/{number}", "~/entry/entry.aspx", false);
+            routes.MapPageRoute("oda", "oda/{dep}", "~/department/oda.aspx", false);
 
         }
 
