@@ -85,6 +85,24 @@ namespace MuhendisSozluk {
         protected global::System.Web.UI.WebControls.Button btn_default_loginout;
         
         /// <summary>
+        /// lbl_department_info control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_department_info;
+        
+        /// <summary>
+        /// lbl_rating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_rating;
+        
+        /// <summary>
         /// title_repeater control.
         /// </summary>
         /// <remarks>
@@ -119,6 +137,33 @@ namespace MuhendisSozluk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel update_entries;
+        
+        /// <summary>
+        /// btn_previous_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_previous_page;
+        
+        /// <summary>
+        /// lbl_pagenumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_pagenumber;
+        
+        /// <summary>
+        /// btn_next_page control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_next_page;
         
         /// <summary>
         /// entry_repeater control.

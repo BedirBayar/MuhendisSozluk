@@ -15,7 +15,9 @@ namespace MuhendisSozluk
     {
         static String con = connectionStrings.bedir;
         static String title2 = "muhendis-sozluk";
-
+        static int entries=1;
+        static int pageindex = 1;
+        static int maxpages = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,7 +27,8 @@ namespace MuhendisSozluk
                 {
                     btn_default_profile.Text = "makamım";
                     btn_default_loginout.Text = "çıkış yap";
-
+                    lbl_department_info.Text = getDepartment(getDepartmentID(user.ToString()));
+                    lbl_rating.Text = getWriterRating(user.ToString()).ToString();
                 }
                 else
                 {
@@ -37,13 +40,14 @@ namespace MuhendisSozluk
                 if (RouteData.Values["title"] != null)
                 {
                     title2 = RouteData.Values["title"].ToString();
+                    setEntries(getTitleID(getTitleName(title2)));
                     loadEntries(title2);
                     lbl_default_title_name.Text = getTitleName(title2);
 
                 }
                 else
                 {
-                   // Response.Redirect("/muhendis-sozluk");
+                    Response.Redirect("/muhendis-sozluk");
 
                 }
             }
@@ -74,10 +78,6 @@ namespace MuhendisSozluk
             DataSet ds_title = loadSolKanat();
             title_repeater.DataSource = ds_title;
             title_repeater.DataBind();
-
-            DataSet ds = fillEntriesFirst();
-            entry_repeater.DataSource = ds;
-            entry_repeater.DataBind();
 
         }
         protected void btn_default_profile_Click(object sender, EventArgs e)
@@ -143,10 +143,30 @@ namespace MuhendisSozluk
 
         public void loadEntries(String url)
         {
-
+           
             DataSet ds = GetData(url);
             entry_repeater.DataSource = ds;
             entry_repeater.DataBind();
+           
+        }
+        public void setEntries(int title)
+        {
+            int result = 0;
+            SqlConnection c1 = new SqlConnection(con);
+            SqlCommand cmd1 = c1.CreateCommand();
+            cmd1.CommandText = "select count (ID) from ENTRY where TitleID=@id";
+            cmd1.Parameters.AddWithValue(@"id", title);
+            c1.Open();
+            var rdr = cmd1.ExecuteReader();
+            if (rdr.Read())
+            {
+                result = rdr.GetInt32(0);
+            }
+            else result = -1;
+            c1.Close();
+            entries = result;
+            maxpages = entries / 10 + 1;
+            lbl_pagenumber.Text = "1 of  " + maxpages.ToString();
         }
         public void loadOneEntry(int number)
         {
@@ -156,9 +176,17 @@ namespace MuhendisSozluk
         }
         private DataSet GetData(String url)
         {
+            int id = getTitleID(getTitleName(url));
+            int start = 10 * (pageindex - 1);
+            int stop = 10 * pageindex;
             SqlConnection con1 = new SqlConnection(connectionStrings.bedir);
-            SqlDataAdapter da = new SqlDataAdapter(@"select * from ENTRY where TitleID=(select ID from TITLE where Url= @url)", con1);
-            da.SelectCommand.Parameters.AddWithValue(@"url", url);
+            SqlDataAdapter da = new SqlDataAdapter(@"select * from 
+                (select Row_Number() over 
+                 (order by ID) as RowIndex, * from ENTRY where TitleID=@id) as Sub
+                 Where Sub.RowIndex > @start and Sub.RowIndex <= @stop", con1);
+            da.SelectCommand.Parameters.AddWithValue(@"id", id);
+            da.SelectCommand.Parameters.AddWithValue(@"start", start);
+            da.SelectCommand.Parameters.AddWithValue(@"stop", stop);
             DataSet ds = new DataSet();
             da.Fill(ds);
             return ds;
@@ -189,12 +217,14 @@ namespace MuhendisSozluk
             if (user != null)
             {
                 // String a = div_write_entry.InnerText;
-                DateTime date = DateTime.Now;
-                String content = div_write_entry.Text.ToString();
+                // String date12 = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                DateTime date = DateTime.UtcNow;
+                String content = div_write_entry.Text.ToString().ToLower();
                 int writerid = getWriterID(user.ToString());
                 int titleid = getTitleID(lbl_default_title_name.Text);
+                String url = Helper.SEOUrl(getTitle(titleid));
 
-                if (titleid != -1)
+                if (titleid != -1 && content!=null)
                 {
                     var connect = new SqlConnection(con);
                     var cmd = connect.CreateCommand();
@@ -213,7 +243,7 @@ namespace MuhendisSozluk
                         var reader = cmd.ExecuteNonQuery();
                         TitleLayer.setTitleUpdate(titleid);
                         div_write_entry.Text = "";
-                        loadEntries(lbl_default_title_name.Text);
+                        Response.Redirect(url);
 
 
                     }
@@ -225,7 +255,7 @@ namespace MuhendisSozluk
                 }
                 else
                 {
-                    lbl_entrysend_status.Text = "bu başlığa entry girişi durduruldu.";
+                    lbl_entrysend_status.Text = "entry boş ya da bu başlığa entry girişi durduruldu.";
                 }
             }
             else
@@ -267,6 +297,27 @@ namespace MuhendisSozluk
             if (reader.Read())
             {
                 result = reader.GetInt32(0);
+            }
+            else
+            {
+                result = 0;
+            }
+            connection.Close();
+            return result;
+        }
+        protected double getWriterRating(String writerName)
+        {
+            double result;
+            var connection = new SqlConnection(connectionStrings.bedir);
+            var command = connection.CreateCommand();
+            command.CommandText = "select Rating from WRITER where Name = @name";
+            command.Parameters.AddWithValue("@name", writerName);
+
+            connection.Open();
+            var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                result = reader.GetDouble(0);
             }
             else
             {
@@ -407,11 +458,8 @@ namespace MuhendisSozluk
             }
             con2.Close();
         }
-        String boolEvetHayir(Boolean x)
-        {
-            if (x) return "evet";
-            return "hayır";
-        }
+        String boolEvetHayir(Boolean x) {    return x ? "Evet" : "Hayır";  }
+
         String getWriter(int id)
         {
             String result = null;
@@ -475,7 +523,7 @@ namespace MuhendisSozluk
 
         protected void btn_new_title_Click(object sender, EventArgs e)
         {
-            String name = txt_user_search.Text;
+            String name = txt_user_search.Text.ToLower();
             String url = Helper.SEOUrl(txt_user_search.Text);
             DateTime date = DateTime.Now;
             int writer_id = getWriterID(Session["username"].ToString());
@@ -495,7 +543,7 @@ namespace MuhendisSozluk
             {
                 Response.Redirect("~/" + url);
             }
-            else lbl_user_search.Text = "başlık tam açılamadı. sıkışmış olmalı";
+            else lbl_user_search.Text = "başlık tam açılamadı.";
 
         }
         protected int getDepartmentID(String username)
@@ -537,7 +585,30 @@ namespace MuhendisSozluk
             div_write_entry.Text += "(bkz: " + "<a href=" + url + " style=" + "text-decoration:none" + "> " + bkz + "</a>)";
 
         }
-     
+
+        protected void btn_previous_page_Click(object sender, EventArgs e)
+        {
+            if (pageindex > 1)
+            {
+                pageindex--;
+                if (pageindex == 1) btn_previous_page.Visible = false;
+                btn_next_page.Visible = true;
+                lbl_pagenumber.Text = pageindex.ToString() + " of " + maxpages.ToString(); 
+                loadEntries(title2);
+            }
+        }
+
+        protected void btn_next_page_Click(object sender, EventArgs e)
+        {
+            if (pageindex < maxpages)
+            {
+                pageindex++;
+                if (pageindex == maxpages) btn_next_page.Visible = false;
+                btn_previous_page.Visible = true;
+                lbl_pagenumber.Text = pageindex.ToString() + " of " + maxpages.ToString();
+                loadEntries(title2);
+            }
+        }
     }//master.cs
 
 }

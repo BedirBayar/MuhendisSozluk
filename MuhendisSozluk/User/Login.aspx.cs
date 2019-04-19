@@ -92,7 +92,7 @@ namespace MuhendisSozluk.User
             connection_login.Close();
             if (login_user != null){
                 Session.Add("username", login_user);
-                Response.Redirect("/default.aspx");
+                Response.Redirect("../muhendis-sozluk");
             }
         }
         protected void btn_default_loginout_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace MuhendisSozluk.User
             else
             {
                 Session.Remove(user.ToString());
-                Response.Redirect("/default.aspx");
+                Response.Redirect("../muhendis-sozluk");
             }
 
         }

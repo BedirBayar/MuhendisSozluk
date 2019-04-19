@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #e6e6e6;
+    background-color: #efefef;
     height: auto;
     width: 100%;
     margin: auto;
@@ -8,11 +8,11 @@
 
 
 .top {
-    margin-top: 10px;
+   /* margin-top: 10px;*/
     width: 100%;
     height: 100px;
     float: left;
-    border: 1px solid #660000;
+  
 }
 
     .top .logo {
@@ -23,7 +23,7 @@
     }
 
     .top .search {
-        width: 49%;
+        width: 50%;
         height: 100%;
         float: left;
         border-right: 1px solid #660000;
@@ -32,7 +32,7 @@
    
 
     .top .profile {
-        width: 25%;
+        width: 24%;
         height: 100%;
         float: left;
     }
@@ -59,9 +59,10 @@
 
 .solkanat {
     width: 25%;
-    height: 1000px;
+    height:1200px;
     float: left;
     border-right: 1px solid #660000;
+    background-color: #aaaaaa;
 }
 .solkanat .search_title { 
     width:100%;
@@ -84,7 +85,7 @@
     height: 900px;
     float: left;
     border-right: 1px solid #660000;
-    background-color: #aa9191;
+    background-color: #efefef;
 }
 .entries .footer {
     width: 100%;
@@ -96,14 +97,15 @@
 }
 .entries .entry_send_button{
     width:100%;
-    height:20px;
+    height:40px;
     text-align:center;
     align-content:center;
-    line-height:20px;
+    line-height:40px;
 }
 
 .sagkanat {
-    width: 23%;
-    height: 600px;
+    width: 24%;
+    height: 1200px;
     float: left;
+    background-color: #aaaaaa;
 }

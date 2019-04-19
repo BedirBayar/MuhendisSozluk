@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\MuhendisSozluk"
+    "\\MuhendisSozluk",
+    "\\MuhendisSozluk\\bin"
   ],
-  "SelectedNode": "\\MuhendisSozluk",
+  "SelectedNode": "\\MuhendisSozluk\\connectionStrings.cs",
   "PreviewInSolutionExplorer": false
 }
